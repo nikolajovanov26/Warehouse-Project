@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ViewOrders"
+    android:layout_marginLeft="@dimen/layoutMargin"
+    android:layout_marginRight="@dimen/layoutMargin"
+    android:layout_marginTop="@dimen/layoutMargin"
+    android:layout_marginBottom="@dimen/layoutMargin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="50dp"
+        android:layout_height="wrap_content">
+
+
+        <Button
+            android:id="@+id/main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/nav_btn_margin"
+            android:layout_marginRight="@dimen/nav_btn_margin"
+            android:text="Home" />
+
+        <Button
+            android:id="@+id/products"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/nav_btn_margin"
+            android:layout_marginRight="@dimen/nav_btn_margin"
+            android:text="Add Products" />
+
+        <Button
+            android:id="@+id/orders"
+            android:layout_width="wrap_content"
+
+            android:backgroundTint="@color/gray"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/nav_btn_margin"
+            android:layout_marginRight="@dimen/nav_btn_margin"
+            android:layout_weight="1"
+            android:text="Orders" />
+    </LinearLayout>
+
+</LinearLayout>

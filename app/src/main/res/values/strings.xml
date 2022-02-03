@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">WarehouseProject</string>
+
+    <string name="selectUser">WarehouseProject</string>
+    <string-array name="users">
+        <item>Warehouse Manager</item>
+        <item>Driver</item>
+        <item>Store Manager</item>
+    </string-array>
+
+
+</resources>

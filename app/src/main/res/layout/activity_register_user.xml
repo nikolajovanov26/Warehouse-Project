@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".RegisterUser">
+
+
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:textSize="32sp"
+        android:layout_marginBottom="5dp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/userType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:prompt="@string/selectUser"
+        android:entries="@array/users"
+        android:minHeight="36dp" />
+
+    <EditText
+        android:id="@+id/registerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textSize="16sp"
+        android:hint="Name"
+        android:inputType="textEmailAddress"
+        android:importantForAutofill="no" />
+
+
+    <EditText
+        android:id="@+id/registerPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Phone Number"
+        android:importantForAutofill="no"
+        android:inputType="phone"
+        android:textSize="16sp"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/registerEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="E-mail Address"
+        android:inputType="textEmailAddress"
+        android:textSize="16sp"
+        tools:ignore="TextContrastCheck"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/registerPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Password"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:textSize="16sp"
+        tools:ignore="TextContrastCheck" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/location"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/registerLocationSelect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Odberi Lokacija" />
+
+        <EditText
+            android:layout_width="250dp"
+            android:ems="10"
+            android:editable="false"
+            android:textSize="16sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/registerLocationText"
+            tools:ignore="Deprecated" />
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/register"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register" />
+
+    <TextView
+        android:id="@+id/SwitchLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Already have an account? Log in!"/>
+
+
+
+</LinearLayout>
