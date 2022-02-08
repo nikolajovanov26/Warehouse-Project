@@ -19,4 +19,52 @@ public class Product {
 
     public Product() {
     }
+
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public String getWarehouseId() {
+        return warehouseId;
+    }
+
+    public void setWarehouseId(String warehouseId) {
+        this.warehouseId = warehouseId;
+    }
 }

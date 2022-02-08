@@ -45,8 +45,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:layout_marginBottom="10dp"
         android:layout_gravity="center"
-        android:text="Name"></TextView>
+        android:text="Name"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/products"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 

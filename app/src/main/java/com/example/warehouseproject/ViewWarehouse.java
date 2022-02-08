@@ -78,6 +78,7 @@ public class ViewWarehouse extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(view.getContext(), ViewProducts.class);
+                        intent.putExtra("id", model.getId());
                         intent.putExtra("name", model.getName());
                         view.getContext().startActivity(intent);
                     }
