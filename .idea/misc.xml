@@ -3,12 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/drawable/custombox.xml" value="0.2485" />
         <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_add_products.xml" value="0.12916666666666668" />
         <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_main_driver.xml" value="0.12916666666666668" />
-        <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_main_store.xml" value="0.12916666666666668" />
+        <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_main_store.xml" value="0.2" />
         <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_main_warehouse.xml" value="0.264" />
         <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_register_user.xml" value="0.11302083333333333" />
         <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_view_orders.xml" value="0.12916666666666668" />
+        <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_view_products.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_view_warehouse.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/warehouses.xml" value="0.25416666666666665" />
         <entry key="..\:/Android Projects/WarehouseProject/app/src/main/res/layout/activity_main.xml" value="0.14447463768115942" />
         <entry key="..\:/Android Projects/WarehouseProject/app/src/main/res/layout/activity_register_user.xml" value="0.14447463768115942" />
       </map>

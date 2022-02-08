@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -16,6 +17,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 public class MainWarehouse extends AppCompatActivity implements View.OnClickListener {
 
@@ -25,8 +28,9 @@ public class MainWarehouse extends AppCompatActivity implements View.OnClickList
     TextView name, phone, location;
 
     private FirebaseUser user;
-    private DatabaseReference reference;
+    private DatabaseReference reference, reference2;
     private String userID;
+    HashMap id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,20 @@ public class MainWarehouse extends AppCompatActivity implements View.OnClickList
                 User userProfil = snapshot.getValue(User.class);
 
                 if (userProfil != null) {
+                    if (userProfil != null) {
+                        id = new HashMap();
+                        id.put("id",userID);
+                        if(userProfil.id == null){
+                            reference2 = FirebaseDatabase.getInstance().getReference("Users");
+                            reference2.child(userID).updateChildren(id).addOnSuccessListener(new OnSuccessListener() {
+                                @Override
+                                public void onSuccess(Object o) {
+
+                                }
+                            });
+                        }
+                    }
+
                     String nameDb = userProfil.name;
                     String phoneDb = userProfil.number;
                     String locationDB = userProfil.lokacija;

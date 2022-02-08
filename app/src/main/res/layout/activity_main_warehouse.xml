@@ -24,8 +24,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/gray"
-            android:layout_marginLeft="@dimen/nav_btn_margin"
-            android:layout_marginRight="@dimen/nav_btn_margin"
             android:text="Home" />
 
         <Button
@@ -41,8 +39,6 @@
             android:id="@+id/orders"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/nav_btn_margin"
-            android:layout_marginRight="@dimen/nav_btn_margin"
             android:layout_weight="1"
             android:text="Orders" />
     </LinearLayout>
