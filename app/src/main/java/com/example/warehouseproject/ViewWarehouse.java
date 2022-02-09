@@ -25,7 +25,6 @@ import com.google.firebase.database.ValueEventListener;
 public class ViewWarehouse extends AppCompatActivity implements View.OnClickListener {
 
     Button main, warehouse, orders;
-    Button placeOrder;
 
     TextView name, phone, location;
 
@@ -48,8 +47,6 @@ public class ViewWarehouse extends AppCompatActivity implements View.OnClickList
         warehouse.setOnClickListener(this);
         orders = findViewById(R.id.orders);
         orders.setOnClickListener(this);
-        placeOrder = findViewById(R.id.placeOrder);
-        placeOrder.setOnClickListener(this);
 
         name = findViewById(R.id.name);
         phone = findViewById(R.id.phone);
@@ -109,10 +106,6 @@ public class ViewWarehouse extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.orders:
                 //startActivity(new Intent(this, ViewOrders.class));
-                break;
-            case R.id.placeOrder:
-                //FirebaseAuth.getInstance().signOut();
-                //startActivity(new Intent(this, MainActivity.class));
                 break;
         }
     }

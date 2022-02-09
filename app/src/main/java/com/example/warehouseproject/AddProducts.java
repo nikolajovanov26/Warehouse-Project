@@ -116,7 +116,7 @@ public class AddProducts extends AppCompatActivity implements View.OnClickListen
 
         String id = (String) userID.toString();
         String key = reference.push().getKey();
-        Product product = new Product(product_db, company_db, price_db, weight_db, stock_db, userID);
+        Product product = new Product(key, product_db, company_db, price_db, weight_db, stock_db, userID);
 
         FirebaseDatabase.getInstance().getReference("Products")
                 .child(key)

@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_margin="10dp"
+    android:layout_gravity="top"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_height="match_parent"
-    tools:context=".ViewWarehouse">
+    android:padding="10dp"
+    tools:context=".ConfirmOrder">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +27,6 @@
             android:id="@+id/warehouse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/gray"
             android:layout_weight="1"
             android:layout_marginLeft="@dimen/nav_btn_margin"
             android:layout_marginRight="@dimen/nav_btn_margin"
@@ -40,12 +40,17 @@
             android:text="Orders" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/warehouses"
+
+    <ListView
+        android:id="@+id/products"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent" />
 
-    </androidx.recyclerview.widget.RecyclerView>
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/confirmOrder"
+        android:layout_marginTop="20dp"
+        android:text="Confirm Order"/>
 
 </LinearLayout>

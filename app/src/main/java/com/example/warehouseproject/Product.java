@@ -1,6 +1,9 @@
 package com.example.warehouseproject;
 
+import java.util.Map;
+
 public class Product {
+    public String id;
     public String product;
     public String company;
     public int price;
@@ -8,7 +11,8 @@ public class Product {
     public int stock;
     public String warehouseId;
 
-    public Product(String product, String company, int price, int weight, int stock, String warehouseId) {
+    public Product(String id, String product, String company, int price, int weight, int stock, String warehouseId) {
+        this.id = id;
         this.product = product;
         this.company = company;
         this.price = price;
@@ -66,5 +70,13 @@ public class Product {
 
     public void setWarehouseId(String warehouseId) {
         this.warehouseId = warehouseId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
