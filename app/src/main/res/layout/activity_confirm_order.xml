@@ -41,16 +41,40 @@
     </LinearLayout>
 
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/products"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content">
+    </androidx.recyclerview.widget.RecyclerView>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/confirmOrder"
+    <LinearLayout
         android:layout_marginTop="20dp"
-        android:text="Confirm Order"/>
+        android:layout_width="match_parent"
+        android:gravity="right"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/orderTotal"
+            android:layout_width="wrap_content"
+            android:text="0"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/orderTotalCurrency"
+            android:layout_width="wrap_content"
+            android:text="MKD"
+            android:layout_marginRight="30dp"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/confirmOrder"
+            android:text="Confirm Order"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>

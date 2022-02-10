@@ -8,6 +8,7 @@ public class Product {
     public String company;
     public int price;
     public int weight;
+    public int qty;
     public int stock;
     public String warehouseId;
 
@@ -22,6 +23,14 @@ public class Product {
     }
 
     public Product() {
+    }
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 
     public String getProduct() {
@@ -79,4 +88,6 @@ public class Product {
     public void setId(String id) {
         this.id = id;
     }
+
+
 }

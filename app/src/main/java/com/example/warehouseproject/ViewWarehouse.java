@@ -57,7 +57,7 @@ public class ViewWarehouse extends AppCompatActivity implements View.OnClickList
         userID = user.getUid();
 
         recyclerView = findViewById(R.id.warehouses);
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         Query query = reference.orderByChild("type").equalTo("Warehouse Manager");
@@ -80,6 +80,8 @@ public class ViewWarehouse extends AppCompatActivity implements View.OnClickList
                         view.getContext().startActivity(intent);
                     }
                 });
+
+
             }
 
             @NonNull
@@ -92,7 +94,12 @@ public class ViewWarehouse extends AppCompatActivity implements View.OnClickList
 
         adapter.startListening();
         recyclerView.setAdapter(adapter);
+        refresh();
 
+    }
+
+    private void refresh() {
+        adapter.notifyDataSetChanged();
     }
 
     @Override

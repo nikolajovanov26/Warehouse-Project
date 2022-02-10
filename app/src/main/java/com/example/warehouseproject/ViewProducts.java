@@ -17,14 +17,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.Query;
 
 import java.io.Serializable;
@@ -51,6 +53,12 @@ public class ViewProducts extends AppCompatActivity implements View.OnClickListe
     Map<String, Integer> cart = new HashMap<>();
     String current;
 
+    Integer prodNum,totalPrice,totalWeight;
+    HashMap putProduct;
+
+    int i;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +67,11 @@ public class ViewProducts extends AppCompatActivity implements View.OnClickListe
         Intent intent = getIntent();
         String whName = intent.getStringExtra("name");
         String whId = intent.getStringExtra("id");
+
+        prodNum = 0;
+        totalPrice = 0;
+        totalWeight =0;
+        i=0;
 
         main = findViewById(R.id.main);
         main.setOnClickListener(this);
@@ -74,7 +87,7 @@ public class ViewProducts extends AppCompatActivity implements View.OnClickListe
         name.setText(whName);
 
         recyclerView = findViewById(R.id.products);
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -129,13 +142,21 @@ public class ViewProducts extends AppCompatActivity implements View.OnClickListe
                 holder.price.setText(model.getPrice()+"");
                 holder.company.setText(model.getCompany());
 
+
+
             }
         };
 
         adapter.startListening();
         recyclerView.setAdapter(adapter);
 
+        refresh();
 
+
+    }
+
+    private void refresh() {
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -151,13 +172,62 @@ public class ViewProducts extends AppCompatActivity implements View.OnClickListe
                 //startActivity(new Intent(this, ViewOrders.class));
                 break;
             case R.id.placeOrder:
+                String key = placeOrder();
                 Intent intent = new Intent(this, ConfirmOrder.class);
-                intent.putExtra("cart", (Serializable)  cart);
+                intent.putExtra("key", key);
                 startActivity(intent);
                 break;
         }
     }
 
+    private String placeOrder() {
+        prodNum=0;
+        i=1;
+        reference2 = FirebaseDatabase.getInstance().getReference("Orders");
+
+        String storeId = userID;
+        Intent intent = getIntent();
+        String whId = intent.getStringExtra("id");
+
+        String key = reference2.push().getKey();
+
+        for(Map.Entry<String, Integer> entry : cart.entrySet()){
+            prodNum++;
+        }
+
+        Order order = new Order(key,storeId,whId,prodNum);
 
 
+
+        FirebaseDatabase.getInstance().getReference("Orders")
+                .child(key)
+                .setValue(order).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(ViewProducts.this, "Added", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ViewProducts.this, "Not added", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
+        for(Map.Entry<String, Integer> entry : cart.entrySet()){
+            putProduct = new HashMap();
+            String productStr = entry.getKey()+"@@@@@"+entry.getValue();
+            String prodNumber = "Product"+i;
+            putProduct.put(prodNumber,productStr);
+            reference2 = FirebaseDatabase.getInstance().getReference("Orders");
+            reference2.child(key).updateChildren(putProduct).addOnSuccessListener(new OnSuccessListener() {
+                @Override
+                public void onSuccess(Object o) {
+                }
+            });
+            i++;
+        }
+
+        return key;
+    }
 }
