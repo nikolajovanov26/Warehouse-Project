@@ -22,9 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-public class ViewOrders extends AppCompatActivity implements View.OnClickListener {
+public class ViewOrdersWarehouse extends AppCompatActivity implements View.OnClickListener {
 
-    Button main, warehouse, orders;
+    Button main, products, orders;
 
     private FirebaseUser user;
     private DatabaseReference reference;
@@ -37,12 +37,12 @@ public class ViewOrders extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_orders);
+        setContentView(R.layout.activity_view_orders_warehouse);
 
         main = findViewById(R.id.main);
         main.setOnClickListener(this);
-        warehouse = findViewById(R.id.warehouse);
-        warehouse.setOnClickListener(this);
+        products = findViewById(R.id.products);
+        products.setOnClickListener(this);
         orders = findViewById(R.id.orders);
         orders.setOnClickListener(this);
 
@@ -54,7 +54,7 @@ public class ViewOrders extends AppCompatActivity implements View.OnClickListene
         //recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Query query = reference.orderByChild("storeId").equalTo(userID);
+        Query query = reference.orderByChild("warehouseId").equalTo(userID);
 
         options = new FirebaseRecyclerOptions.Builder<Order>().setQuery(query,Order.class).build();
         adapter = new FirebaseRecyclerAdapter<Order, ViewHolderOrders>(options) {
@@ -79,7 +79,7 @@ public class ViewOrders extends AppCompatActivity implements View.OnClickListene
                         //intent.putExtra("id", model.getId());
                         //intent.putExtra("name", model.getName());
                         //view.getContext().startActivity(intent);
-                        Toast.makeText(ViewOrders.this, "id: "+model.getId(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ViewOrdersWarehouse.this, "id: "+model.getId(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -87,7 +87,6 @@ public class ViewOrders extends AppCompatActivity implements View.OnClickListene
 
         adapter.startListening();
         recyclerView.setAdapter(adapter);
-
     }
 
 
@@ -95,10 +94,10 @@ public class ViewOrders extends AppCompatActivity implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.main:
-                startActivity(new Intent(this, MainStore.class));
+                startActivity(new Intent(this, MainWarehouse.class));
                 break;
-            case R.id.warehouse:
-                startActivity(new Intent(this, ViewWarehouse.class));
+            case R.id.products:
+                startActivity(new Intent(this, AddProducts.class));
                 break;
             case R.id.orders:
                 //startActivity(new Intent(this, ViewOrders.class));

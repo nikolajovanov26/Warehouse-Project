@@ -94,12 +94,6 @@ public class ViewWarehouse extends AppCompatActivity implements View.OnClickList
 
         adapter.startListening();
         recyclerView.setAdapter(adapter);
-        refresh();
-
-    }
-
-    private void refresh() {
-        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -112,7 +106,7 @@ public class ViewWarehouse extends AppCompatActivity implements View.OnClickList
                 //startActivity(new Intent(this, AddProducts.class));
                 break;
             case R.id.orders:
-                //startActivity(new Intent(this, ViewOrders.class));
+                startActivity(new Intent(this, ViewOrders.class));
                 break;
         }
     }

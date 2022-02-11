@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ViewOrders"
     android:layout_margin="10dp"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ViewOrdersDriver">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,25 +23,25 @@
             android:text="Home" />
 
         <Button
-            android:id="@+id/warehouse"
+            android:id="@+id/findOrders"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginLeft="@dimen/nav_btn_margin"
             android:layout_marginRight="@dimen/nav_btn_margin"
-            android:text="Find Warehouse" />
+            android:text="Find Order" />
 
         <Button
-            android:id="@+id/orders"
+            android:id="@+id/viewOrders"
             android:layout_width="wrap_content"
-            android:backgroundTint="@color/gray"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/gray"
             android:layout_weight="1"
             android:text="Orders" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/viewOrders"
+        android:id="@+id/viewOrdersRV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

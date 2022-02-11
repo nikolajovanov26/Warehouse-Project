@@ -103,7 +103,7 @@ public class MainWarehouse extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(this, AddProducts.class));
                 break;
             case R.id.orders:
-                startActivity(new Intent(this, ViewOrders.class));
+                startActivity(new Intent(this, ViewOrdersWarehouse.class));
                 break;
             case R.id.logOut:
                 FirebaseAuth.getInstance().signOut();

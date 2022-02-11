@@ -193,7 +193,7 @@ public class ConfirmOrder extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, ViewWarehouse.class));
                 break;
             case R.id.orders:
-                //startActivity(new Intent(this, ViewOrders.class));
+                startActivity(new Intent(this, ViewOrders.class));
                 break;
             case R.id.confirmOrder:
                 status = new HashMap();
@@ -207,7 +207,7 @@ public class ConfirmOrder extends AppCompatActivity implements View.OnClickListe
                     }
                 });
                 Toast.makeText(this, "Order Confirmed", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(this, ViewOrders.class));
+                startActivity(new Intent(this, ViewOrders.class));
                 break;
         }
     }

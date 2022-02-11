@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -22,9 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-public class ViewOrders extends AppCompatActivity implements View.OnClickListener {
+public class ViewOrdersDriver extends AppCompatActivity implements View.OnClickListener {
 
-    Button main, warehouse, orders;
+    Button main, find, orders;
 
     private FirebaseUser user;
     private DatabaseReference reference;
@@ -37,24 +36,24 @@ public class ViewOrders extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_orders);
+        setContentView(R.layout.activity_view_orders_driver);
 
         main = findViewById(R.id.main);
         main.setOnClickListener(this);
-        warehouse = findViewById(R.id.warehouse);
-        warehouse.setOnClickListener(this);
-        orders = findViewById(R.id.orders);
+        find = findViewById(R.id.findOrders);
+        find.setOnClickListener(this);
+        orders = findViewById(R.id.viewOrders);
         orders.setOnClickListener(this);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
         reference = FirebaseDatabase.getInstance().getReference("Orders");
 
-        recyclerView = findViewById(R.id.viewOrders);
+        recyclerView = findViewById(R.id.viewOrdersRV);
         //recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Query query = reference.orderByChild("storeId").equalTo(userID);
+        Query query = reference.orderByChild("driverId").equalTo(userID);
 
         options = new FirebaseRecyclerOptions.Builder<Order>().setQuery(query,Order.class).build();
         adapter = new FirebaseRecyclerAdapter<Order, ViewHolderOrders>(options) {
@@ -71,7 +70,6 @@ public class ViewOrders extends AppCompatActivity implements View.OnClickListene
                 holder.id.setText(model.getId());
                 holder.status.setText(model.getStatus());
                 holder.price.setText(model.getTotalPrice()+"");
-
                 holder.viewOrder.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -79,7 +77,7 @@ public class ViewOrders extends AppCompatActivity implements View.OnClickListene
                         //intent.putExtra("id", model.getId());
                         //intent.putExtra("name", model.getName());
                         //view.getContext().startActivity(intent);
-                        Toast.makeText(ViewOrders.this, "id: "+model.getId(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ViewOrdersDriver.this, "id: "+model.getId(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -87,21 +85,19 @@ public class ViewOrders extends AppCompatActivity implements View.OnClickListene
 
         adapter.startListening();
         recyclerView.setAdapter(adapter);
-
     }
-
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.main:
-                startActivity(new Intent(this, MainStore.class));
+                startActivity(new Intent(this, MainDriver.class));
                 break;
-            case R.id.warehouse:
-                startActivity(new Intent(this, ViewWarehouse.class));
+            case R.id.findOrders:
+                startActivity(new Intent(this, FindOrders.class));
                 break;
-            case R.id.orders:
-                //startActivity(new Intent(this, ViewOrders.class));
+            case R.id.viewOrders:
+                //startActivity(new Intent(this, ViewOrdersDriver.class));
                 break;
         }
     }

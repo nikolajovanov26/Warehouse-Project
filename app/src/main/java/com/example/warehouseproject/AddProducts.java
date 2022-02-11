@@ -65,7 +65,7 @@ public class AddProducts extends AppCompatActivity implements View.OnClickListen
                 //startActivity(new Intent(this, AddProducts.class));
                 break;
             case R.id.orders:
-                startActivity(new Intent(this, ViewOrders.class));
+                startActivity(new Intent(this, ViewOrdersWarehouse.class));
                 break;
             case R.id.addProduct:
                 addProduct();

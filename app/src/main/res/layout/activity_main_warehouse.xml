@@ -2,13 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginLeft="@dimen/layoutMargin"
-    android:layout_marginRight="@dimen/layoutMargin"
-    android:layout_marginTop="@dimen/layoutMargin"
-    android:layout_marginBottom="@dimen/layoutMargin"
+    tools:context=".MainWarehouse"
+    android:layout_margin="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainWarehouse"
     android:orientation="vertical">
 
     <LinearLayout

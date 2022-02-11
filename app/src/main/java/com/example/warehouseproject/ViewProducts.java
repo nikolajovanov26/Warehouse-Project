@@ -169,7 +169,7 @@ public class ViewProducts extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, ViewWarehouse.class));
                 break;
             case R.id.orders:
-                //startActivity(new Intent(this, ViewOrders.class));
+                startActivity(new Intent(this, ViewOrders.class));
                 break;
             case R.id.placeOrder:
                 String key = placeOrder();
