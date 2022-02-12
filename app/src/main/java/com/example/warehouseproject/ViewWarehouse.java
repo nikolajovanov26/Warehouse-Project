@@ -22,6 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
+
 public class ViewWarehouse extends AppCompatActivity implements View.OnClickListener {
 
     Button main, warehouse, orders;
@@ -29,8 +31,9 @@ public class ViewWarehouse extends AppCompatActivity implements View.OnClickList
     TextView name, phone, location;
 
     private FirebaseUser user;
-    private DatabaseReference reference, reference2;
+    private DatabaseReference reference;
     private String userID;
+    DecimalFormat rating;
 
     private FirebaseRecyclerOptions<User> options;
     private FirebaseRecyclerAdapter<User, ViewHolderViewWarehouse> adapter;
@@ -40,6 +43,8 @@ public class ViewWarehouse extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_warehouse);
+
+        rating = new DecimalFormat("0.0");
 
         main = findViewById(R.id.main);
         main.setOnClickListener(this);
@@ -69,7 +74,7 @@ public class ViewWarehouse extends AppCompatActivity implements View.OnClickList
                 holder.name.setText(model.getName());
                 holder.location.setText(model.getLokacija());
                 if(model.getRating()!=null){
-                    holder.rating.setText(model.getRating().toString());
+                    holder.rating.setText(rating.format(model.getRating())+"");
                 }
                 holder.viewProducts.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WarehouseProject">
         <activity
+            android:name=".RateWareStore"
+            android:exported="false" />
+        <activity
             android:name=".FindOrders"
             android:exported="false" />
         <activity

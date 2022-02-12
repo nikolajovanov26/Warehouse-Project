@@ -18,9 +18,12 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class ViewOrdersWarehouse extends AppCompatActivity implements View.OnClickListener {
 
@@ -68,20 +71,42 @@ public class ViewOrdersWarehouse extends AppCompatActivity implements View.OnCli
 
             @Override
             protected void onBindViewHolder(@NonNull ViewHolderOrders holder, int position, @NonNull Order model) {
+
+                if(model.getStatus().equals("Not confirmed") ){
+                    holder.viewOrder.setVisibility(View.VISIBLE);
+                    holder.viewOrder.setText("Call Store");
+                    reference = FirebaseDatabase.getInstance().getReference("Users");
+                    Query query = reference.orderByChild("id").equalTo(model.getStoreId());
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot snap : snapshot.getChildren()) {
+                                User user = snap.getValue(User.class);
+                                String tel = user.getNumber();
+                                holder.viewOrder.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Toast.makeText(ViewOrdersWarehouse.this, "Calling "+tel, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                } else {
+                    holder.viewOrder.setVisibility(View.GONE);
+                }
+
                 holder.id.setText(model.getId());
                 holder.status.setText(model.getStatus());
                 holder.price.setText(model.getTotalPrice()+"");
 
-                holder.viewOrder.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //Intent intent = new Intent(view.getContext(), ViewOrder.class);
-                        //intent.putExtra("id", model.getId());
-                        //intent.putExtra("name", model.getName());
-                        //view.getContext().startActivity(intent);
-                        Toast.makeText(ViewOrdersWarehouse.this, "id: "+model.getId(), Toast.LENGTH_SHORT).show();
-                    }
-                });
             }
         };
 

@@ -10,12 +10,15 @@
         <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_main_driver.xml" value="0.12916666666666668" />
         <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_main_store.xml" value="0.2" />
         <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_main_warehouse.xml" value="0.264" />
+        <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_rate_driver.xml" value="0.176" />
+        <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_rate_ware_store.xml" value="0.176" />
         <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_register_user.xml" value="0.11302083333333333" />
         <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_view_orders.xml" value="0.12916666666666668" />
         <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_view_orders_driver.xml" value="0.13072916666666667" />
         <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_view_orders_warehouse.xml" value="0.12916666666666668" />
         <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_view_products.xml" value="0.25416666666666665" />
         <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/activity_view_warehouse.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/driver_my_orders.xml" value="0.4" />
         <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/find_products.xml" value="0.4" />
         <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/orders.xml" value="0.264" />
         <entry key="..\:/Android Projects/WarehouseProject-nz/app/src/main/res/layout/products.xml" value="0.25416666666666665" />

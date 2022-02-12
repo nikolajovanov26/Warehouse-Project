@@ -197,18 +197,12 @@ public class ViewProducts extends AppCompatActivity implements View.OnClickListe
 
         Order order = new Order(key,storeId,whId,prodNum);
 
-
-
         FirebaseDatabase.getInstance().getReference("Orders")
                 .child(key)
                 .setValue(order).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(ViewProducts.this, "Added", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(ViewProducts.this, "Not added", Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
 

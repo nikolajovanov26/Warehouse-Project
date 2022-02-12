@@ -3,20 +3,16 @@ package com.example.warehouseproject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,7 +36,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.app.Activity;
+import android.content.Context;
+
+import androidx.core.content.ContextCompat;
+
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -55,6 +59,7 @@ public class FindOrders extends AppCompatActivity implements View.OnClickListene
     private FirebaseRecyclerOptions<Order> options;
     private FirebaseRecyclerAdapter<Order, ViewHolderFindOrders> adapter;
     private RecyclerView recyclerView;
+    DecimalFormat rating;
 
     HashMap status, driverIdAdd;
 
@@ -63,6 +68,8 @@ public class FindOrders extends AppCompatActivity implements View.OnClickListene
     Double lon0, lon1, lon2;
 
     Location startPoint, middlePoint, endPoint;
+
+    LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,14 +87,24 @@ public class FindOrders extends AppCompatActivity implements View.OnClickListene
         reference = FirebaseDatabase.getInstance().getReference("Orders");
         userID = user.getUid();
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        if (ActivityCompat.checkSelfPermission(FindOrders.this,
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            getLocation();
-        } else {
-            ActivityCompat.requestPermissions(FindOrders.this
-                    , new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED&&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions((Activity) this, new String[]{
+                    Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
+            },1);
         }
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, 1, new LocationListener() {
+            @Override
+            public void onLocationChanged(@NonNull Location location) {
+                lat0 = location.getLatitude();
+                lon0 = location.getLongitude();
+            }
+        });
+
 
         recyclerView = findViewById(R.id.orders);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -100,7 +117,7 @@ public class FindOrders extends AppCompatActivity implements View.OnClickListene
             @NonNull
             @Override
             public ViewHolderFindOrders onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.find_products, parent, false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.find_orders, parent, false);
                 return new ViewHolderFindOrders(view);
             }
 
@@ -120,7 +137,8 @@ public class FindOrders extends AppCompatActivity implements View.OnClickListene
                             User user = snap.getValue(User.class);
 
                             holder.wName.setText(user.getName());
-                            holder.wRating.setText(user.getRating().toString());
+                            rating = new DecimalFormat("0.0");
+                            holder.wRating.setText(rating.format(user.getRating()));
 
                             Query query2 = reference2.orderByChild("id").equalTo(model.getStoreId());
                             query2.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -147,7 +165,8 @@ public class FindOrders extends AppCompatActivity implements View.OnClickListene
                                         endPoint.setLongitude(lon2);
 
                                         holder.sName.setText(user2.getName());
-                                        holder.sRating.setText(user2.getRating().toString());
+
+                                        holder.sRating.setText(rating.format(user2.getRating()));
 
                                         double distance = startPoint.distanceTo(middlePoint);
                                         double dist = distance / 1000.0;
@@ -210,38 +229,7 @@ public class FindOrders extends AppCompatActivity implements View.OnClickListene
         recyclerView.setAdapter(adapter);
     }
 
-    private void getLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
 
-        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-            @Override
-            public void onComplete(@NonNull Task<Location> task) {
-                Location location = task.getResult();
-                if(location != null){
-                    try {
-                        Geocoder geocoder = new Geocoder(FindOrders.this,
-                                Locale.getDefault());
-                        List<Address> addresses = geocoder.getFromLocation(
-                                location.getLatitude(),location.getLongitude(),1
-                        );
-                        lat0 = addresses.get(0).getLatitude();
-                        lon0 = addresses.get(0).getLongitude();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-    }
 
     @Override
     public void onClick(View view) {

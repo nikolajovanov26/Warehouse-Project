@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +17,14 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+
+import java.util.HashMap;
 
 public class ViewOrders extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,6 +33,8 @@ public class ViewOrders extends AppCompatActivity implements View.OnClickListene
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID;
+
+    HashMap confirm;
 
     private FirebaseRecyclerOptions<Order> options;
     private FirebaseRecyclerAdapter<Order, ViewHolderOrders> adapter;
@@ -68,17 +74,30 @@ public class ViewOrders extends AppCompatActivity implements View.OnClickListene
 
             @Override
             protected void onBindViewHolder(@NonNull ViewHolderOrders holder, int position, @NonNull Order model) {
+
+                if(!model.getStatus().equals("Not confirmed") ){
+                    holder.viewOrder.setVisibility(View.GONE);
+                }
                 holder.id.setText(model.getId());
                 holder.status.setText(model.getStatus());
                 holder.price.setText(model.getTotalPrice()+"");
 
+
+
                 holder.viewOrder.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //Intent intent = new Intent(view.getContext(), ViewOrder.class);
-                        //intent.putExtra("id", model.getId());
-                        //intent.putExtra("name", model.getName());
-                        //view.getContext().startActivity(intent);
+                        confirm = new HashMap();
+
+                        confirm.put("status","Confirmed");
+
+                        reference = FirebaseDatabase.getInstance().getReference("Orders");
+                        reference.child(model.getId()).updateChildren(confirm).addOnSuccessListener(new OnSuccessListener() {
+                            @Override
+                            public void onSuccess(Object o) {
+
+                            }
+                        });
                         Toast.makeText(ViewOrders.this, "id: "+model.getId(), Toast.LENGTH_SHORT).show();
                     }
                 });

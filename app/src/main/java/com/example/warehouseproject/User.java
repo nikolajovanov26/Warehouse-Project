@@ -11,6 +11,7 @@ public class User {
     public Double lat;
     public Double lon;
     public Double rating;
+    public Integer numRatings;
 
 
     public User() {
@@ -26,6 +27,7 @@ public class User {
         this.lat = lat;
         this.lon = lon;
         this.rating = 0.0;
+        this.numRatings = 0;
     }
 
     public User(String type, String name, String number, String email, String password) {
@@ -115,5 +117,29 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Integer getNumRatings() {
+        return numRatings;
+    }
+
+    public void setNumRatings(Integer numRatings) {
+        this.numRatings = numRatings;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", type='" + type + '\'' +
+                ", name='" + name + '\'' +
+                ", number='" + number + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", lokacija='" + lokacija + '\'' +
+                ", lat=" + lat +
+                ", lon=" + lon +
+                ", rating=" + rating +
+                '}';
     }
 }
